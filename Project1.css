@@ -1,0 +1,194 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+/*hiding few elements in mobile device*/
+@media screen and (max-width: 768px) {
+    div.col-sm-6 {
+      display: none;
+    }
+}
+
+.content{
+    width:100%;
+    overflow:hidden;
+    background-color:rgb(71, 71, 71);
+}
+
+/* First section background */
+
+.section1{
+    background-image:url("Background Image.svg");
+    background-size:cover;
+    margin-top:60px;
+}
+
+/* Second and Third section background */
+
+.section2,.section3{
+    background-image:url("Background Image.svg");
+    background-size:cover;
+    margin-top:10px;
+}
+
+/* Headings for the three sections*/
+
+.heading{
+    color:black;
+    font-size:40px;
+    text-align:center;
+    padding:60px;
+    padding-top:70px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.row:after{
+    display:table;
+    content: "";
+    clear: both;
+}
+
+input[type=text], select {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid rgb(245, 195, 146);
+    border-radius: 20px;
+    box-sizing: border-box;
+    }
+
+/*Classes inside the field boxes*/
+.field{         
+    border : 2px solid yellow;
+    border-radius : 10px;
+    outline: none;
+    padding : 5px;
+    min-width : 20%;            
+    text-align:center;
+    color:black;
+    font-size:16px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.cover {
+    margin : 10px 0 10px 0;
+}
+
+.newfield{
+    text-align:center;
+    color:black;
+    padding:0px;
+    font-size:15.5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.dscvit{
+    padding-top:60px;
+    padding-bottom:80px;
+}
+
+.dsclabel{
+    color:rgb(105, 104, 104);
+    font-size:25px;
+   text-align:left;
+   padding:0px;
+    margin:0px;
+}
+
+.dsclogo{
+    text-align:right;
+    padding:0px;
+    margin:0px;
+    
+}
+
+.sclabel{
+    font-size:22px;
+    text-align:left;
+    padding:0px;
+    margin:0px;
+}
+
+.sclogo{
+    padding:0px;
+    margin:0px;
+    text-align:right;
+}
+
+.snapchat{
+    float:right;
+    text-align:left;
+    padding-top:60px;
+    padding-bottom:80px;
+}
+
+input[type=password], select {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid rgb(245, 195, 146);
+    border-radius: 20px;
+    box-sizing: border-box;
+    }
+
+    input[type=submit], select {
+        width: 27%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border-radius: 20px;
+        box-sizing: border-box;
+        background-color: rgb(255, 212, 133);
+        }
+
+    .col-sm-12{
+        text-align:center;
+        float:left;
+        font-size:15px;
+        width:100%;
+        padding:15px;
+    }
+
+    .col-12{
+        text-align:center;
+        float:left;
+        font-size:15px;
+        width:100%;
+        padding:15px;
+    }
+
+/*Description field*/
+    textarea, select{
+        width: 40%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border-radius: 10px;
+        box-sizing: border-box;
+        border: 3px solid rgb(245, 195, 146);
+    }
+
+    input[type=button], select {
+        width: 20%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border-radius: 20px;
+        box-sizing: border-box;
+        border: 3px solid rgb(245, 195, 146);
+        background-color:  rgb(255, 233, 211);
+        }
+
+        input[type=textarea], select {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border-radius: 20px;
+            box-sizing: border-box;
+            background-color: solid rgb(252, 189, 127);
+            }
