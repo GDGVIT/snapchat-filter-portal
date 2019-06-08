@@ -3,12 +3,6 @@ body{
     padding: 0px;
 }
 
-/*hiding few elements in mobile device*/
-@media screen and (max-width: 768px) {
-    div.col-sm-6 {
-      display: none;
-    }
-}
 
 @media screen and (max-width:768px){
     div.col-12{
@@ -19,22 +13,10 @@ body{
             padding:15px;
         }
     }
-
-    @media screen and(max-width:768px){
-        div.field{         
-            border : 2px solid yellow;
-            border-radius : 10px;
-            outline: none;
-            padding : 5px;
-            min-width : 20%;            
-            text-align:center;
-            color:black;
-            font-size:10px;
-            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-    }
+   
+}    
     
-}
+
 
 
 .content{
@@ -123,6 +105,7 @@ input[type=text], select {
 .dscvit{
     padding-top:60px;
     padding-bottom:80px;
+    
 }
 
 .dsclabel{
@@ -131,6 +114,7 @@ input[type=text], select {
    text-align:left;
    padding:0px;
     margin-top:2px;
+    
 
 }
 
@@ -139,6 +123,7 @@ input[type=text], select {
     padding:0px;
     margin:0px;
     
+    
 }
 
 .sclabel{
@@ -146,6 +131,7 @@ input[type=text], select {
     text-align:left;
     padding:0px;
     margin-top:2px;
+    
 }
 
 
@@ -154,6 +140,7 @@ input[type=text], select {
     text-align:left;
     padding-top:60px;
     padding-bottom:80px;
+    
 }
 
 input[type=password], select {
