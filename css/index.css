@@ -13,23 +13,22 @@ body{
 .content{
     width:100%;
     overflow:hidden;
-    background-color:rgb(71, 71, 71);
 }
 
 /* First section background */
 
 .section1{
-    background-image:url("Background Image.svg");
+    height: 100vh;
+    width: 100%;
+    background-image:url("../images/background.svg");
     background-size:cover;
-    margin-top:60px;
 }
 
 /* Second and Third section background */
 
 .section2,.section3{
-    background-image:url("Background Image.svg");
+    background-image:url("../images/background.svg");
     background-size:cover;
-    margin-top:10px;
 }
 
 /* Headings for the three sections*/
