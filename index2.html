@@ -47,22 +47,22 @@
                                     <input class="field  input-width" type="text" placeholder="Name" name="name" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="text" placeholder="Email" name="email" maxlength="30" required>
+                                        <input class="field  input-width" type="text"  onsubmit=" return validateEmail(email)" placeholder="Email" name="email" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="password" placeholder="Password" name="password" maxlength="30" required>
+                                        <input class="field  input-width" type="password" onsubmit=" return Validate()"  placeholder="Password" id="txtPassword" name="password" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="password" placeholder="Confirm Password" name="password" maxlength="30" required>
+                                        <input class="field  input-width" type="password" onsubmit=" return Validate()"  placeholder="Confirm Password" id="txtConfirmPassword" name="password" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input type="button" class="field  input-width" value="Register">
+                                        <input  id="reg" onclick="myFunction()" type="button" class="field  input-width" value="Register">
                                     </div>
                             </div>
                             <div class="col-12">
                                 <a href="index.html"><b><u>Already have an account? Login</u></b></a>
                             </div>
-                            <div class="container ">
+                            <div class="container">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  dscvit">
                                                 <div class="container ">
@@ -95,5 +95,56 @@
                 </form>
             </div>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+            $("#reg").click(function(){
+            $.post("https://snapchatportal.herokuapp.com/register",
+            {
+                name: 'test',
+                email: "testing@gmail.com",
+                password: "test",
+                created: "19-07-07:08:00:00"
+            },
+
+            //TIMESTAMP
+            // function myFunction() {
+            // var d = new Date();
+            // var n = d.getTime();
+            // document.getElementById("time").innerHTML = n;
+            // }
+            
+            function(data,status){
+            alert("Data: " + data + "\nStatus: " + status );
+            
+            });
+            });
+            });
+        </script>
+
+        <!-- PASSWORD VALIDATION -->
+        <script type="text/javascript">
+        function Validate() {
+            var password = document.getElementById("txtPassword").value;
+            var confirmPassword = document.getElementById("txtConfirmPassword").value;
+            if (password != confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+         
+        // EMAIL VALIDATION
+        function validateEmail(email) 
+            {
+                var re = /\S+@\S+/;
+                return re.test(email);
+            }
+        </script>
     </body>
 </html>
+
+
+
+

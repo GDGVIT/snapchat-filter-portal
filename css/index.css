@@ -95,7 +95,7 @@ input[type=text], select {
 .newfield{
     text-align:center;
     color:black;
-    padding:0px;
+    padding:15px;
     font-size:15.5px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -152,9 +152,9 @@ input[type=password], select {
     box-sizing: border-box;
     }
 
-    input[type=submit], select {
-        width: 27%;
-        padding: 12px 20px;
+    button, select {
+        width: 20%;
+        padding: 20px 20px;
         margin: 8px 0;
         display: inline-block;
         border-radius: 15px;
@@ -162,6 +162,8 @@ input[type=password], select {
         background-color: #ffe699;
         border: 0px;
         }
+
+        
 
     
 
