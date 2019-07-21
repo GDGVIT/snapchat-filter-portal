@@ -38,15 +38,15 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <input type="file" multiple accept="image/png" style="display:none" id="upload-file" >
-                                <button  id="choose-button" class="newfield input-width">Choose Image</button>
+                                <input type="file" multiple accept="image/png" style="display:none" >
+                                <button class="newfield input-width"  id="inputFileToLoad">Choose Image</button>
                             </div>
                             <div class="col-12">
                                 <textarea name="message" placeholder= "Description" rows="10" cols="70">
                                 </textarea>    
                             </div>
                             <div class="col-12">
-                                <input  id="upl" type="button" class="field input-width"  value="Submit">
+                                <input  id="upl" type="button" onclick="return uploadPicture()" onclick="return callService(formData)" class="field input-width"  value="Submit">
                             </div>
                         </div>
                     </div>
@@ -83,73 +83,46 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
+        <script type="text/javascript">
             $(document).ready(function(){
             $("#upl").click(function(){
             $.post("https://snapchatportal.herokuapp.com/upload",
             {
-                filter:"testfile.png",
-
+                filter:"inputFileToLoad",
             },
+
             function(data,status){
             alert("Data: " + data + "\nStatus: " + status );
             });
             });
             });
 
-            // IMAGE UPLOADING
+            function uploadPicture()
+            {
+                
+                var formData = new FormData();
+                formData.append("file", $("#inputFileToLoad")[0].files[0]);
+                formData.append("language", "eng");
+                formData.append("filetype", "PNG");
+                callService(formData);                     
+            }
 
-            document.querySelector('#choose-button').addEventListener('click', function() {
-            document.querySelector('#upload-file').click();
-            });
-            document.querySelector('#upload-file').files[0]
-            document.querySelector('#upload-file').files[1]
-
-            document.querySelector('#upload-file').addEventListener('change', function() {
-            // This is the file user has chosen
-            var file = this.files[0];
-
-            // In case of multiple files
-            var file2 = this.files[1];
-            var file3 = this.files[2];
-            });
-
-            //CHECKING FOR PNG FILES
-            document.querySelector('#upload-file').addEventListener('change', function() {
-                var mime_types = ['image/png'];
-
-            if(mime_types.indexOf(file.type) == -1) {
-            alert('Error : Incorrect file type');
-            return;
-        }
-            });
-
-            //SENDING AJAX REQUEST
-
-            var data = new FormData();
-
-            var request = new XMLHttpRequest();
-
-            // File selected by the user
-            data.append('file', document.querySelector('#upload-file').files[0]);
-
-            request.addEventListener('load', function(e) {
-                console.log(request.response);
-            });
-
-            // Upload progress on request.upload
-            request.upload.addEventListener('progress', function(e) {
-                var percent_complete = (e.loaded / e.total)*100;    
-                // Percentage of upload completed
-                console.log(percent_complete);
-            });
-
-            request.responseType = 'json';
-
-            // Send POST request to the server side script
-            request.open('post', 'upload.php'); 
-            request.send(data);
-
+            function callService(formData)
+            {
+                jQuery.ajax({
+                    url: "http://snapchatportal.herokuapp.com/upload",
+                    data: formData,
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function success()
+                    {
+                        alert("Success");
+                    }
+                });   
+            }   
         </script>
 
     </body>

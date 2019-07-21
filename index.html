@@ -44,10 +44,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <input class="field input-width" type="text" placeholder="Email" name="email" maxlength="30" required>
+                                <input class="field input-width" type="text" id="logemail" onsubmit="return getemailforlogin()" placeholder="Email" name="email" maxlength="30" required>
                             </div>
                             <div class="col-12">
-                                <input class="field input-width" type="password" placeholder="Password" name="password" maxlength="30" required>
+                                <input class="field input-width" type="password" id="logpass" onsubmit="return getpasswordforlogin()" placeholder="Password" name="password" maxlength="30" required>
                             </div>
                             <div class="col-12 col-xs-12">
                                     <input id="log" class="field input-width" onload="checkCookie()" type="button" value="LogIn">
@@ -96,9 +96,19 @@
             $("#log").click(function(){
             $.post("https://snapchatportal.herokuapp.com/login",
             {
-                email: "test@gmail.com",
-                password: "test"
+                email: "logemail",
+                password: "logpass"
             },
+
+            function getemailforlogin(){  
+            var logemail=document.getElementById("logemail").value;  
+            },
+
+            function getpasswordforlogin(){  
+            var logpass=document.getElementById("logpass").value;  
+            },
+
+
             function(data,status){
             alert("Data: " + data + "\nStatus: " + status );
             });

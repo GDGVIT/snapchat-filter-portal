@@ -44,16 +44,16 @@
                         <div class="row" style="text-align:center">
                             <div class="col-12">
                                     <div class="cover">
-                                    <input class="field  input-width" type="text" placeholder="Name" name="name" maxlength="30" required>
+                                    <input class="field  input-width" type="text"  id="name1" onsubmit="return getname()" placeholder="Name" name="name1" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="text"  onsubmit=" return validateEmail(email)" placeholder="Email" name="email" maxlength="30" required>
+                                        <input class="field  input-width" type="text" id="email1" onsubmit=" return validateEmail(email)" onsubmit="return getemail()" placeholder="Email" name="email" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="password" onsubmit=" return Validate()"  placeholder="Password" id="txtPassword" name="password" maxlength="30" required>
+                                        <input class="field  input-width" type="password" id="pass1" onsubmit=" return Validate()" onsubmit="return getpassword()" placeholder="Password" id="txtPassword" name="password" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="password" onsubmit=" return Validate()"  placeholder="Confirm Password" id="txtConfirmPassword" name="password" maxlength="30" required>
+                                        <input class="field  input-width" type="password" id="pass2" onsubmit=" return Validate()" onsubmit="return getconfirmpassword()" placeholder="Confirm Password" id="txtConfirmPassword" name="password" maxlength="30" required>
                                     </div>
                                     <div class="cover">
                                         <input  id="reg" type="button" class="field  input-width" value="Register">
@@ -102,11 +102,26 @@
             $("#reg").click(function(){
             $.post("https://snapchatportal.herokuapp.com/register",
             {
-                name: 'test',
-                email: "testing@gmail.com",
-                password: "test",
-                created: "19-07-07:08:00:00"
+                name: 'name1',
+                email: "email1",
+                password: "pass1"
             },
+
+            function getname(){  
+            var name1=document.getElementById("name1").value;  
+            },
+
+            function getemail(){  
+            var email1=document.getElementById("email1").value;  
+            },
+            
+            function getpassword(){  
+            var pass1=document.getElementById("pass1").value;  
+            }, 
+
+            function getconfirmpassword(){  
+            var pass2=document.getElementById("pass2").value;  
+            }, 
 
             function(data,status){
             alert("Data: " + data + "\nStatus: " + status );
