@@ -44,19 +44,19 @@
                         <div class="row" style="text-align:center">
                             <div class="col-12">
                                     <div class="cover">
-                                    <input class="field  input-width" type="text"  id="name1" onsubmit="return getname()" placeholder="Name" name="name1" maxlength="30" required>
+                                    <input class="field  input-width" type="text"  id="name1"  placeholder="Name" name="name1" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="text" id="email1" onsubmit=" return validateEmail(email)" onsubmit="return getemail()" placeholder="Email" name="email" maxlength="30" required>
+                                        <input class="field  input-width" type="text" id="email1" placeholder="Email" name="email" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="password" id="pass1" onsubmit=" return Validate()" onsubmit="return getpassword()" placeholder="Password" id="txtPassword" name="password" maxlength="30" required>
+                                        <input class="field  input-width" type="password" id="pass1" placeholder="Password" id="txtPassword" name="password" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input class="field  input-width" type="password" id="pass2" onsubmit=" return Validate()" onsubmit="return getconfirmpassword()" placeholder="Confirm Password" id="txtConfirmPassword" name="password" maxlength="30" required>
+                                        <input class="field  input-width" type="password" id="pass2" placeholder="Confirm Password" id="txtConfirmPassword" name="password" maxlength="30" required>
                                     </div>
                                     <div class="cover">
-                                        <input  id="reg" type="button" class="field  input-width" value="Register">
+                                        <input  id="reg" type="button" class="field input-width" value="Register">
                                     </div>
                             </div>
                             <div class="col-12">
@@ -98,61 +98,73 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
-            $(document).ready(function(){
-            $("#reg").click(function(){
-            $.post("https://snapchatportal.herokuapp.com/register",
-            {
-                name: 'name1',
-                email: "email1",
-                password: "pass1"
-            },
 
-            function getname(){  
-            var name1=document.getElementById("name1").value;  
-            },
+            window.onload=function(){
+                $("#reg").addEventListener("click", function(e) {
+                    $(document).ready(function(){
+                        $("#reg").click(function(){
+                        var name1=document.getElementById("name1").val(); 
+                        var email1=document.getElementById("email1").val();  
+                        var pass1=document.getElementById("pass1").val();
+                        var pass2=document.getElementById("pass2").val(); 
 
-            function getemail(){  
-            var email1=document.getElementById("email1").value;  
-            },
-            
-            function getpassword(){  
-            var pass1=document.getElementById("pass1").value;  
-            }, 
+                        console.log(email1,pass1)
 
-            function getconfirmpassword(){  
-            var pass2=document.getElementById("pass2").value;  
-            }, 
-
-            function(data,status){
-            alert("Data: " + data + "\nStatus: " + status );
-            
-            });
-            });
-            });
-        </script>
-
-        <!-- PASSWORD VALIDATION -->
-        <script type="text/javascript">
-        function Validate() {
-            var password = document.getElementById("txtPassword").value;
-            var confirmPassword = document.getElementById("txtConfirmPassword").value;
-            if (password != confirmPassword) {
-                alert("Passwords do not match.");
-                return false;
-            }
-            return true;
-        }
-         
-        // EMAIL VALIDATION
-        function validateEmail(email) 
-            {
-                var re = /\S+@\S+/;
-                return re.test(email);
+                        // Password validation
+                        // email validation
+                        
+                        let status=[];
+                        let re=/\S+@\S+/;
+                            
+                            if(re.test(email.value.trim())){
+                                status.push("true")
+                            }
+                            else{
+                                status.push("false")
+                            }
+                            
+                            var password = document.getElementById("txtPassword").value;
+                            var confirmPassword = document.getElementById("txtConfirmPassword").value;
+                                if (password != confirmPassword) {
+                                    status.push("false")
+                                }
+                                else{
+                                    status.push("true")
+                                }
+                                
+                            if(status.includes("false")){
+                                console.log("There was some error while validating")
+                            }
+                            else{
+                                console.log("Validated")
+                        
+                                $.ajax(
+                                {
+                                    url: "https://snapchatportal.herokuapp.com/register",
+                                    type: 'POST',
+                                    data: {
+                                        name: name1,
+                                        email: email1,
+                                        password: pass1
+                                    },
+                                    success: function (data) {
+                                    //called when successful
+                                    $('#ajaxphp-results').html(data);
+                                    },
+                                    error: function (e) {
+                                    //called when there is an error
+                                    //console.log(e.message);
+                                    },
+                                    function(data,status){
+                                    alert("Data: " + data + "\nStatus: " + status );
+                                    },
+                                }); 
+                            }  
+                        });
+                    });
+                });
             }
         </script>
     </body>
 </html>
-
-
-
 
