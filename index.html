@@ -44,10 +44,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <input class="field input-width" type="text" id="logemail" onsubmit="return getemailforlogin()" placeholder="Email" name="email" maxlength="30" required>
+                                <input class="field input-width" type="text" id="logemail" placeholder="Email" name="email" maxlength="30" required>
                             </div>
                             <div class="col-12">
-                                <input class="field input-width" type="password" id="logpass" onsubmit="return getpasswordforlogin()" placeholder="Password" name="password" maxlength="30" required>
+                                <input class="field input-width" type="password" id="logpass" placeholder="Password" name="password" maxlength="30" required>
                             </div>
                             <div class="col-12 col-xs-12">
                                     <input id="log" class="field input-width" onload="checkCookie()" type="button" value="LogIn">
@@ -92,28 +92,40 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
-            $(document).ready(function(){
-            $("#log").click(function(){
-            $.post("https://snapchatportal.herokuapp.com/login",
-            {
-                email: "logemail",
-                password: "logpass"
-            },
 
-            function getemailforlogin(){  
-            var logemail=document.getElementById("logemail").value;  
-            },
+            window.onload=function(){
+                $("#log").addEventListener("click", function(e) {
+                    $(document).ready(function(){
+                        $("#log").click(function(){
+                            var logemail=document.getElementById("logemail").val();  
+                            var logpass=document.getElementById("logpass").val();  
 
-            function getpasswordforlogin(){  
-            var logpass=document.getElementById("logpass").value;  
-            },
+                            console.log(logemail,logpass)
 
-
-            function(data,status){
-            alert("Data: " + data + "\nStatus: " + status );
-            });
-            });
-            });
+                            $.ajax(
+                                {
+                                    url: "https://snapchatportal.herokuapp.com/login",
+                                    type: 'POST',
+                                    data: {
+                                            email: logemail,
+                                            password: logpass
+                                    },
+                                    success: function (data) {
+                                    //called when successful
+                                    $('#ajaxphp-results').html(data);
+                                    },
+                                    error: function (e) {
+                                    //called when there is an error
+                                    //console.log(e.message);
+                                    },
+                                    function(data,status){
+                                    alert("Data: " + data + "\nStatus: " + status );
+                                    },
+                            });
+                        });
+                    });
+                });
+            }
         </script>
 
         <!-- STORING AND CHECKING FOR COOKIES -->

@@ -84,18 +84,35 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
-            $(document).ready(function(){
-            $("#upl").click(function(){
-            $.post("https://snapchatportal.herokuapp.com/upload",
-            {
-                filter:"inputFileToLoad",
-            },
 
-            function(data,status){
-            alert("Data: " + data + "\nStatus: " + status );
+        window.onload=function(){
+            $("#upl").addEventListener("click",function(e) {
+                $(document).ready(function(){
+                    $("#upl").click(function(){
+
+                        $.ajax(
+                                {
+                                    url: "https://snapchatportal.herokuapp.com/upload",
+                                    type: 'POST',
+                                    data: {
+                                        filter:inputFileToLoad,
+                                    },
+                                    success: function (data) {
+                                    //called when successful
+                                    $('#ajaxphp-results').html(data);
+                                    },
+                                    error: function (e) {
+                                    //called when there is an error
+                                    //console.log(e.message);
+                                    },
+                                    function(data,status){
+                                    alert("Data: " + data + "\nStatus: " + status );
+                                    },
+                        });   
+                    });
+                });
             });
-            });
-            });
+        }
 
             function uploadPicture()
             {
