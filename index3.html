@@ -1,3 +1,148 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" defer>
+            <link rel="stylesheet" type="text/css" href="css/index.css">
+
+            <title>
+                Filter Upload
+            </title>
+            <style>
+                @media (max-width : 650px) {
+                    .input-width {
+                        min-width: 40%;
+                    }
+                    .logo,.dsclabel,.sclabel{
+                    text-align:center;
+                }
+
+                .dscvit{
+                    padding-bottom:5px;
+                }
+                
+                
+                }
+    
+            </style>
+
+    </head>
+    <body>
+        <div class="content">
+            <div class="section3">
+                <div class="heading">
+                    <b>Upload your filter</b>
+                </div>
+                <form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="file" multiple accept="image/png" style="display:none" >
+                                <button class="newfield input-width"  id="inputFileToLoad">Choose Image</button>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" placeholder= "Description" rows="10" cols="70">
+                                </textarea>    
+                            </div>
+                            <div class="col-12">
+                                <input  id="upl" type="button" onclick="return uploadPicture()" onclick="return callService(formData)" class="field input-width"  value="Submit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container ">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  dscvit">
+                                        <div class="container ">
+                                            <div class="row">
+                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-3 logo">
+                                                        <img src="images/dsc-logo.jpeg">
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 dsclabel">
+                                                        DSC <b>VIT</b>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 snapchat">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-3 col-xs-3 logo logo">
+                                                    <img src="images/sc-logo.jpg">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 sclabel">
+                                                    <b>Snapchat</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
+
+        window.onload=function(){
+            document.getElementById("upl").addEventListener("click",function(e) {
+                    document.getElementById("#upl").addEventListener("click",function(){
+
+                        $.ajax(
+                                {
+                                    url: "https://snapchatportal.herokuapp.com/upload",
+                                    type: 'POST',
+                                    data: {
+                                        filter:inputFileToLoad,
+                                    },
+                                    success: function (data) {
+                                    //called when successful
+                                    $('#ajaxphp-results').html(data);
+                                    },
+                                    error: function (e) {
+                                        alert('error');
+                                    },
+                                    function(data,status){
+                                        alert("Data: " + data + "\nStatus: " + status );
+                                    },
+                        });   
+                    });
+                });
+            });
+        }
+
+            function uploadPicture()
+            {
+                
+                var formData = new FormData();
+                formData.append("file", $("#inputFileToLoad")[0].files[0]);
+                formData.append("language", "eng");
+                formData.append("filetype", "PNG");
+                callService(formData);                     
+            }
+
+            function callService(formData)
+            {
+                jQuery.ajax({
+                    url: "http://snapchatportal.herokuapp.com/upload",
+                    data: formData,
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function success()
+                    {
+                        alert("Success");
+                    }
+                });   
+            }   
+        </script>
+
+    </body>
+=======
 <!DOCTYPE html>
 <html>
     <head>
@@ -143,4 +288,5 @@
         </script>
 
     </body>
+>>>>>>> bf9de31a9b083099b21d30dc1ad5cdabddec9e0f
 </html>
