@@ -86,9 +86,8 @@
         <script type="text/javascript">
 
         window.onload=function(){
-            $("#upl").addEventListener("click",function(e) {
-                $(document).ready(function(){
-                    $("#upl").click(function(){
+            document.getElementById("upl").addEventListener("click",function(e) {
+                    document.getElementById("#upl").addEventListener("click",function(){
 
                         $.ajax(
                                 {
@@ -102,11 +101,10 @@
                                     $('#ajaxphp-results').html(data);
                                     },
                                     error: function (e) {
-                                    //called when there is an error
-                                    //console.log(e.message);
+                                        alert('error');
                                     },
                                     function(data,status){
-                                    alert("Data: " + data + "\nStatus: " + status );
+                                        alert("Data: " + data + "\nStatus: " + status );
                                     },
                         });   
                     });

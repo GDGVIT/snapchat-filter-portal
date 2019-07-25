@@ -94,11 +94,10 @@
         <script>
 
             window.onload=function(){
-                $("#log").addEventListener("click", function(e) {
-                    $(document).ready(function(){
-                        $("#log").click(function(){
-                            var logemail=document.getElementById("logemail").val();  
-                            var logpass=document.getElementById("logpass").val();  
+                document.getElementById("log").addEventListener("click", function(e) {
+                        document.getElementById("log").addEventListener("click",function(){
+                            var logemail=document.getElementById("logemail").value;  
+                            var logpass=document.getElementById("logpass").value;  
 
                             console.log(logemail,logpass)
 
