@@ -1,3 +1,172 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+    <head>
+
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <title>
+            Login Page
+        </title>
+        <style>
+            @media (max-width : 650px) {
+                .input-width {
+                    min-width: 50%;
+                }
+
+                .logo,.dsclabel,.sclabel{
+                    text-align:center;
+                }
+
+
+                .dscvit{
+                    padding-bottom:5px;
+                }
+            }
+            @media (max-width : 768px){
+                    .input-width {
+                        min-width: 50%;
+                    }
+                }
+            
+        </style>
+    </head>
+
+    <body>
+        <div class="content">
+            <div class="section1">
+                <div class="heading">
+                        <b>Filter Submission Portal</b>
+                </div>
+                <form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <input class="field input-width" type="text" id="logemail" placeholder="Email" name="email" maxlength="30" required>
+                            </div>
+                            <div class="col-12">
+                                <input class="field input-width" type="password" id="logpass" placeholder="Password" name="password" maxlength="30" required>
+                            </div>
+                            <div class="col-12 col-xs-12">
+                                    <input id="log" class="field input-width" onload="checkCookie()" type="button" value="LogIn">
+                            </div>
+                            <div class="col-12 ">
+                                <a href="index2.html"><b><u>Don't have an account? Register</u></b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 dscvit">
+                                    <div class="container">
+                                        <div class="row">
+                                                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-3 logo">
+                                                    <img src="images/dsc-logo.jpeg">
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 dsclabel">
+                                                    DSC <b>VIT</b>
+                                                </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 snapchat">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-xs-3 logo">
+                                                <img src="images/sc-logo.jpg">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 sclabel">
+                                                <b>Snapchat</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script>
+
+            window.onload=function(){
+                document.getElementById("log").addEventListener("click", function(e) {
+                        document.getElementById("log").addEventListener("click",function(){
+                            var logemail=document.getElementById("logemail").value;  
+                            var logpass=document.getElementById("logpass").value;  
+
+                            console.log(logemail,logpass)
+
+                            $.ajax(
+                                {
+                                    url: "https://snapchatportal.herokuapp.com/login",
+                                    type: 'POST',
+                                    data: {
+                                            email: logemail,
+                                            password: logpass
+                                    },
+                                    success: function (data) {
+                                    //called when successful
+                                    $('#ajaxphp-results').html(data);
+                                    },
+                                    error: function (e) {
+                                    //called when there is an error
+                                    //console.log(e.message);
+                                    },
+                                    function(data,status){
+                                    alert("Data: " + data + "\nStatus: " + status );
+                                    },
+                            });
+                        });
+                    });
+                });
+            }
+        </script>
+
+        <!-- STORING AND CHECKING FOR COOKIES -->
+        <script>
+        function setCookie(cname,cvalue,exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+        }
+
+        function checkCookie() {
+        var user=getCookie("username");
+        if (user != "") {
+            alert("Welcome again " + user);
+        } else {
+            user = prompt("Please enter your name:","");
+            if (user != "" && user != null) {
+            setCookie("username", user, 30);
+            }
+        }
+        }
+    </script>
+    </body>
+=======
 <!DOCTYPE html>
 <html>
     <head>
@@ -166,4 +335,5 @@
         }
     </script>
     </body>
+>>>>>>> bf9de31a9b083099b21d30dc1ad5cdabddec9e0f
 </html>
