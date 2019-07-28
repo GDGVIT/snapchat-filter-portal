@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col-12">
                                     <input type="file" id="selectedFile" accept="image/png" style="display: none;" />
-                                    <input type="button" value="Choose Image" onclick="document.getElementById('selectedFile').click();" />
+                                    <input type="button" id="inputFileToLoad" class="newfield input-width" value="Choose Image" onclick="document.getElementById('selectedFile').click();" />
                                 <!-- <input type="file" multiple accept="image/png" style="display:none" >
                                 <button class="newfield input-width"  id="inputFileToLoad">Choose Image</button> -->
                             </div>
@@ -49,7 +49,7 @@
                                 </textarea>    
                             </div>
                             <div class="col-12">
-                                <input  id="upl" type="button" onclick="return uploadPicture()" onclick="return callService(formData)" class="field input-width"  value="Submit">
+                                <input  id="upl" type="button" onclick="return uploadPicture()" class="field input-width"  value="Submit">
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,8 @@
             {
                 
                 var formData = new FormData();
-                formData.append("file", $("#inputFileToLoad")[0].files[0]);
+                var fileField = document.querySelector('input[type="file"]');
+                formData.append("file", $("#inputFileToLoad").files);
                 formData.append("language", "eng");
                 formData.append("filetype", "PNG");
                 callService(formData);                     
@@ -126,19 +127,15 @@
 
             function callService(formData)
             {
-                jQuery.ajax({
-                    url: "http://snapchatportal.herokuapp.com/upload",
+                fetch("http://snapchatportal.herokuapp.com/upload",{
                     data: formData,
-                    dataType: 'json',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
+                    method: 'PUT',
                     type: 'POST',
-                    success: function success()
-                    {
-                        alert("Success");
-                    }
-                });   
+                   
+                })
+                .then(response => response.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => console.log('Success:', JSON.stringify(response)));
             }   
         </script>
 
