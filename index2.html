@@ -150,9 +150,6 @@
                       console.log("Validated")
                   }
 
-    
-
-
         fetch("https://snapchatportal.herokuapp.com/register", {
                     method: 'POST',
                     headers: {
@@ -166,9 +163,21 @@
                     .then(function (response) {
                          return response.json();
                     })
-                    .then( res => {
-                        console.log(res)
+                    // .then( res => {
+                    //     console.log(res)
+                    // })
+
+                    .then(res => {
+                        console.log("hii response", res)
+                        console.log("hi get token from here", res.token);
+                        sessionStorage.setItem("token", res.token)
+                        if (res.token) {
+                            window.location.href = "index.html";
+                        } else {
+                            console.log("Getting error")
+                        }
                     })
+
                     .catch( err => {
                         console.log(err)
                     })
