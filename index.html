@@ -90,104 +90,37 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-    
-            window.onload = function () {
-                document.getElementById("reg").addEventListener("click", function (e) {
-    
-                    var name1 = document.getElementById("name1").value;
-                    var email1 = document.getElementById("email1").value;
-                    var pass1 = document.getElementById("pass1").value;
-                    var created = "19-07-07:08:00:00"
-                    console.log(email1);
-                    $.ajax(
-                        {
-                            url: "https://snapchatportal.herokuapp.com/register",
-                            type: 'POST',
-                            data: {
-                                name: name1,
-                                email: email1,
-                                password: pass1,
-                                created : created
-                            },
-                            success: function (data) {
-                                //called when successful
-                                console.log("Success")
-                            },
-                            error: function (e) {
-                                console.log("Error")
-                            }
-                        });
-    
-    
-                    // Password validation
-                    // email validation
-    
-                    // let status = [];
-                    // let re = /\S+@\S+/;
-    
-                    // if (re.test(email.value.trim())) {
-                    //     status.push("true")
-                    // }
-                    // else {
-                    //     status.push("false")
-                    // }
-    
-                    // var password = document.getElementById("txtPassword").value;
-                    // var confirmPassword = document.getElementById("txtConfirmPassword").value;
-                    // if (password != confirmPassword) {
-                    //     status.push("false")
-                    // }
-                    // else {
-                    //     status.push("true")
-                    // }
-    
-                    // if (status.includes("false")) {
-                    //     console.log("There was some error while validating")
-                    // }
-                    // else {
-                    //     console.log("Validated")
-                    // }
-    
-                });
-            }
-        </script>
-
-<!-- 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
 
             window.onload=function(){
                 document.getElementById("log").addEventListener("click", function(e) {
-                        document.getElementById("log").addEventListener("click",function(){
                             var logemail=document.getElementById("logemail").value;  
                             var logpass=document.getElementById("logpass").value;  
 
-                            console.log(logemail,logpass)
 
-                            $.ajax(
-                                {
-                                    url: "https://snapchatportal.herokuapp.com/login",
-                                    type: 'POST',
-                                    data: {
-                                            email: logemail,
-                                            password: logpass
-                                    },
-                                    success: function (data) {
-                                    //called when successful
-                                    $('#ajaxphp-results').html(data);
-                                    },
-                                    error: function (e) {
-                                    //called when there is an error
-                                    //console.log(e.message);
-                                    },
-                                    function(data,status){
-                                    alert("Data: " + data + "\nStatus: " + status );
-                                    },
-                            });
-                        });
-                    });
+
+                           
+                    fetch("https://snapchatportal.herokuapp.com/login", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                        email: logemail,
+                        password:logpass,
+                        }),
+                    })
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then( res => {
+                            console.log(res)
+                        })
+                        .catch( err => {
+                            console.log(err)
+                        })
+                
                 });
             }
         </script> -->
