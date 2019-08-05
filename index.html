@@ -24,7 +24,6 @@
                 text-align: center;
             }
 
-
             .dscvit {
                 padding-bottom: 5px;
             }
@@ -107,35 +106,34 @@
                 var email = document.getElementById("logemail");
                 var password = document.getElementById("logpass");
 
-                // validation 
-
+              
                 let status = [];
                 let re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
-                // validation generalisation (to be used with email and empty wala for password)
-
+               
                 if (false) {
 
-                    // validation failed
+                   
                     document.getElementById("logemail").style.borderColor = "red";
                     document.getElementById("logemail").value = "";
                     document.getElementById("logemail").placeholder = "Please enter valid input";
 
-                    // push false in status array as well
+                    
                     status.push("false")
 
-                    // task for you search how  to make placeholder color red using css pseudo classes
+                    document.getElementById("logemail").classList.add("red");
 
+                  
                 } else {
 
                     if (re.test(email.value.trim())) {
                         status.push("true")
                     }
-                    // push true in status array and do other success related stuff (if required)
+                    
 
                 }
 
-                //Password validation
+               
 
                 if (false) {
 
@@ -145,41 +143,39 @@
                         status.push("false")
                     }
 
-                    // validation failed
+                    
                     document.getElementById("logpass").style.borderColor = "red";
                     document.getElementById("logpass").value = "";
                     document.getElementById("logpass").placeholder = "Please enter valid input";
 
-                    // push false in status array as well
+                   
                     status.push("false")
 
-                    document.getElementById("logemail").classList.add("red");
                     document.getElementById("logpass").classList.add("red");
 
-                    // task for you search how  to make placeholder color red using css pseudo classes
+               
 
                 } else {
 
                     status.push("true")
-                    // push true in status array and do other success related stuff (if required)
+                    
 
                 }
 
-                // chk status array for true or false 
+                
 
                 if (status.includes("false")) {
                     console.log("There was some error while validating")
 
                     return ("false")
-                    // validation failed
-                    // do nothing return     return false
+                   
                 }
 
                 else {
 
                     console.log("Validated")
 
-                    // show loader
+                    
                     document.getElementById("log").value = "Loading..."
 
 
@@ -214,13 +210,11 @@
                     //         console.log(err)
                     //     })
 
-                    // on fetch call response hide loader and move to next page
-
+                   
                 }
 
+
                 
-                // remember you need to reset the field color after              
-                // user clicks back on input box like red ---> yellow (golden)
                 function focus() {
                     document.getElementById(logemail).style.bordercolor = "#ffe699";
                     document.getElementById(logpass).style.bordercolor = "#ffe699";
