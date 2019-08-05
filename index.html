@@ -44,18 +44,16 @@
             <div class="heading">
                 <b>Filter Submission Portal</b>
             </div>
-            <form onsubmit="return validateForm()">
+            <form>
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <input class="field input-width" type="text" id="logemail" placeholder="Email" name="email"
-                                maxlength="30" required>
-                            <div class="error" id="emailErr"></div>
+                                maxlength="30" onfocus="focus()" required>
                         </div>
                         <div class="col-12">
                             <input class="field input-width" type="password" id="logpass" placeholder="Password"
-                                name="password" maxlength="30" required>
-                            <div class="error" id="passErr"></div>
+                                name="password" maxlength="30" onfocus="focus()" required>
                         </div>
                         <div class="col-12 col-xs-12">
                             <input id="log" class="field input-width" onload="checkCookie()" type="button"
@@ -106,76 +104,133 @@
             document.getElementById("log").addEventListener("click", function (e) {
                 var logemail = document.getElementById("logemail").value;
                 var logpass = document.getElementById("logpass").value;
+                var email = document.getElementById("logemail");
+                var password = document.getElementById("logpass");
+
+                // validation 
+
+                let status = [];
+                let re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+                // validation generalisation (to be used with email and empty wala for password)
+
+                if (false) {
+
+                    // validation failed
+                    document.getElementById("logemail").style.borderColor = "red";
+                    document.getElementById("logemail").value = "";
+                    document.getElementById("logemail").placeholder = "Please enter valid input";
+
+                    // push false in status array as well
+                    status.push("false")
+
+                    // task for you search how  to make placeholder color red using css pseudo classes
+
+                } else {
+
+                    if (re.test(email.value.trim())) {
+                        status.push("true")
+                    }
+                    // push true in status array and do other success related stuff (if required)
+
+                }
+
+                //Password validation
+
+                if (false) {
+
+                    var len = password.length;
+
+                    if (len <= 6) {
+                        status.push("false")
+                    }
+
+                    // validation failed
+                    document.getElementById("logpass").style.borderColor = "red";
+                    document.getElementById("logpass").value = "";
+                    document.getElementById("logpass").placeholder = "Please enter valid input";
+
+                    // push false in status array as well
+                    status.push("false")
+
+                    document.getElementById("logemail").classList.add("red");
+                    document.getElementById("logpass").classList.add("red");
+
+                    // task for you search how  to make placeholder color red using css pseudo classes
+
+                } else {
+
+                    status.push("true")
+                    // push true in status array and do other success related stuff (if required)
+
+                }
+
+                // chk status array for true or false 
+
+                if (status.includes("false")) {
+                    console.log("There was some error while validating")
+
+                    return ("false")
+                    // validation failed
+                    // do nothing return     return false
+                }
+
+                else {
+
+                    console.log("Validated")
+
+                    // show loader
+                    document.getElementById("log").value = "Loading..."
 
 
-                // fetch("https://snapchatportal.herokuapp.com/login", {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify({
-                //     email: logemail,
-                //     password:logpass,
-                //     }),
-                // })
-                //     .then(function (response) {
-                //         return response.json();
-                //     })
-                //     // .then( res => {
-                //     //     console.log(res)
-                //     // })
+                    // fetch("https://snapchatportal.herokuapp.com/login", {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify({
+                    //     email: logemail,
+                    //     password:logpass,
+                    //     }),
+                    // })
+                    //     .then(function (response) {
+                    //         return response.json();
+                    //     })
+                    //     // .then( res => {
+                    //     //     console.log(res)
+                    //     // })
 
-                //     .then(res => {
-                //     sessionStorage.setItem("token", res.token)
-                //     if (res.token) {
-                //         window.location.href = "index3.html";
-                //     } else {
-                //         console.log("Getting error")
-                //     }
-                // })
-                //     .catch( err => {
-                //         console.log(err)
-                //     })
+                    //     .then(res => {
+                    //     sessionStorage.setItem("token", res.token)
+                    //     if (res.token) {
+                    //         window.location.href = "index3.html";
+                    //         document.getElementById("log").value = "LogIn"
+
+                    //     } else {
+                    //         console.log("Getting error")
+                    //     }
+                    // })
+                    //     .catch( err => {
+                    //         console.log(err)
+                    //     })
+
+                    // on fetch call response hide loader and move to next page
+
+                }
+
+                
+                // remember you need to reset the field color after              
+                // user clicks back on input box like red ---> yellow (golden)
+                function focus() {
+                    document.getElementById(logemail).style.bordercolor = "#ffe699";
+                    document.getElementById(logpass).style.bordercolor = "#ffe699";
+                }
+
 
             });
         }
 
-        function printError(elemId, hintMsg) {
-            document.getElementById(elemId).innerHTML = hintMsg;
-        }
 
-        // Defining a function to validate form 
-        function validateForm() {
-
-            var passErr = emailErr = true;
-
-            // Validate email address
-            if (logemail == "") {
-                printError("emailErr", "Please enter your email address");
-            } else {
-                // Regular expression for basic email validation
-                var regex = /^\S+@\S+\.\S+$/;
-                if (regex.test(logemail) === false) {
-                    printError("emailErr", "Please enter a valid email address");
-                } else {
-                    printError("emailErr", "");
-                    emailErr = false;
-                }
-            }
-
-            // Validate password
-            if (logpass == "") {
-                printError("passErr", "Please enter your password");
-            } else {
-                var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
-                if (regex.test(logpass) === false) {
-                    printError("passErr", "Please enter a valid password");
-                } else {
-                    printError("passErr", "");
-                    passErr = false;
-                }
-            }
-        }
     </script>
 
     <!-- STORING AND CHECKING FOR COOKIES -->
