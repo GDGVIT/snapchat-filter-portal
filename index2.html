@@ -117,12 +117,11 @@
         window.onload = function () {
             document.getElementById("reg").addEventListener("click", function (e) {
 
-                var name1 = document.getElementById("name1").value;
-                var email1 = document.getElementById("email1").value;
-                var pass1 = document.getElementById("pass1").value;
-                var email = document.getElementById("email1");
-                var password = document.getElementById("pass1");
-                var confirmPassword = document.getElementById("pass2");
+
+                var name = document.getElementById("name1").value;
+                var email = document.getElementById("email1").value;
+                var password = document.getElementById("pass1").value;
+                var confirmPassword = document.getElementById("pass2").value;
                 var created = "19-07-07:08:00:00"
 
 
@@ -132,72 +131,53 @@
                 let status = [];
                 let re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
-                if (false) {
+                if (re.test(email.value.trim())) {
+
+                    status.push("true")
+
+                } else {
 
                     document.getElementById("email1").style.borderColor = "red";
                     document.getElementById("email1").value = "";
                     document.getElementById("email1").placeholder = "Please enter valid input";
 
-                   
                     status.push("false")
 
                     document.getElementById("email1").classList.add("red");
-                   
 
-                } else {
-
-                    if (re.test(email.value.trim())) {
-                        status.push("true")
-                    }
-                    
                 }
 
-                if (false) {
+                var len = password.length;
+                if (len >= 6) {
 
-                    var len = password.length;
+                    status.push("true")
+                   
+                } else if(password.value != confirmPassword.value || len<=6){
 
-                    if (len <= 6 && password != confirmPassword) {
-                        status.push("false")
-                    }
+                    status.push("false")
 
-                  
                     document.getElementById("pass1").style.borderColor = "red";
                     document.getElementById("pass1").value = "";
                     document.getElementById("pass1").placeholder = "Please enter valid input";
+
                     document.getElementById("pass2").style.borderColor = "red";
                     document.getElementById("pass2").value = "";
                     document.getElementById("pass2").placeholder = "Please enter valid input";
 
-                   
-                    status.push("false")
-
-
                     document.getElementById("pass1").classList.add("red");
                     document.getElementById("pass2").classList.add("red");
 
-                
-
-                } else {
-
-                    status.push("true")
-                   
-
                 }
-
-              
 
                 if (status.includes("false")) {
                     console.log("There was some error while validating")
 
                     return ("false")
-                    
                 }
 
                 else {
 
                     console.log("Validated")
-
-                    
                     document.getElementById("reg").value = "Loading..."
 
                     // fetch("https://snapchatportal.herokuapp.com/register", {
@@ -205,9 +185,9 @@
                     //             headers: {
                     //                 'Content-Type': 'application/json',
                     //             },
-                    //             body: JSON.stringify({name: name1 ,
-                    //             email: email1,
-                    //             password: pass1,
+                    //             body: JSON.stringify({name: name.value ,
+                    //             email: email.value,
+                    //             password: password.value,
                     //             created: created}),
                     //         })
                     //             .then(function (response) {

@@ -101,81 +101,57 @@
 
         window.onload = function () {
             document.getElementById("log").addEventListener("click", function (e) {
-                var logemail = document.getElementById("logemail").value;
-                var logpass = document.getElementById("logpass").value;
-                var email = document.getElementById("logemail");
-                var password = document.getElementById("logpass");
+                var email = document.getElementById("logemail").value;
+                var password = document.getElementById("logpass").value;
 
-              
+
                 let status = [];
                 let re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
-               
-                if (false) {
 
-                   
+                if (re.test(email.value.trim())) {
+
+                    status.push("true")
+
+                } else {
+
                     document.getElementById("logemail").style.borderColor = "red";
                     document.getElementById("logemail").value = "";
                     document.getElementById("logemail").placeholder = "Please enter valid input";
 
-                    
                     status.push("false")
 
                     document.getElementById("logemail").classList.add("red");
-
-                  
-                } else {
-
-                    if (re.test(email.value.trim())) {
-                        status.push("true")
-                    }
                     
-
                 }
 
-               
+                var len = password.length;
+                if (len >= 6) {
 
-                if (false) {
-
-                    var len = password.length;
-
-                    if (len <= 6) {
-                        status.push("false")
-                    }
-
-                    
-                    document.getElementById("logpass").style.borderColor = "red";
-                    document.getElementById("logpass").value = "";
-                    document.getElementById("logpass").placeholder = "Please enter valid input";
-
-                   
-                    status.push("false")
-
-                    document.getElementById("logpass").classList.add("red");
-
-               
+                    status.push("true")
 
                 } else {
 
                     status.push("true")
-                    
+                    document.getElementById("logpass").style.borderColor = "red";
+                    document.getElementById("logpass").value = "";
+                    document.getElementById("logpass").placeholder = "Please enter valid input";
+                    status.push("false")
 
+                    document.getElementById("logpass").classList.add("red");
                 }
-
                 
 
                 if (status.includes("false")) {
                     console.log("There was some error while validating")
 
                     return ("false")
-                   
                 }
 
                 else {
 
                     console.log("Validated")
 
-                    
                     document.getElementById("log").value = "Loading..."
 
 
@@ -185,8 +161,8 @@
                     //         'Content-Type': 'application/json',
                     //     },
                     //     body: JSON.stringify({
-                    //     email: logemail,
-                    //     password:logpass,
+                    //     email: email.value,
+                    //     password:password.value,
                     //     }),
                     // })
                     //     .then(function (response) {
@@ -210,14 +186,12 @@
                     //         console.log(err)
                     //     })
 
-                   
+
                 }
 
-
-                
                 function focus() {
-                    document.getElementById(logemail).style.bordercolor = "#ffe699";
-                    document.getElementById(logpass).style.bordercolor = "#ffe699";
+                    document.getElementById("logemail").style.bordercolor = "#ffe699";
+                    document.getElementById("logpass").style.bordercolor = "#ffe699";
                 }
 
 
