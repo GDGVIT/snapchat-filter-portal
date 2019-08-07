@@ -14,6 +14,12 @@
     <title>
         Registration Page
     </title>
+
+    <script>
+        function yellow(event) {
+            event.target.style.borderColor = "#ffe699";
+            event.target.placeholder = "";
+        }</script>
     <style>
         @media (max-width : 650px) {
             .input-width {
@@ -37,7 +43,7 @@
             }
         }
 
-        
+
         @media (max-width : 992px) {
             .input-width {
                 min-width: 50%;
@@ -63,19 +69,19 @@
                             </div>
                             <div class="cover">
                                 <input class="field  input-width" type="text" id="email1" placeholder="Email"
-                                    name="email" onfocus="focus()" maxlength="30" required>
+                                    name="email" onfocus="yellow(event)" maxlength="30" required>
                             </div>
                             <div class="cover">
                                 <input class="field  input-width" type="password" placeholder="Password" id="pass1"
                                     name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                                     title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
-                                    maxlength="30" onfocus="focus()" required>
+                                    maxlength="30" onfocus="yellow(event)" required>
                             </div>
                             <div class="cover">
                                 <input class="field  input-width" type="password" placeholder="Confirm Password"
                                     id="pass2" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                                     title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
-                                    maxlength="30" onfocus="focus()"required>
+                                    maxlength="30" onfocus="yellow(event)" required>
                             </div>
                             <div class="cover">
                                 <input id="reg" type="button" class="field input-width" value="Register">
@@ -158,8 +164,8 @@
                 if (len >= 6) {
 
                     status.push("true")
-                   
-                } else if(password.value != confirmPassword.value || len<=6){
+
+                } else if (password.value != confirmPassword.value || len <= 6) {
 
                     status.push("false")
 
@@ -217,13 +223,6 @@
                     //                 console.log(err)
                     //             })
                 }
-
-                function focus() {
-                    document.getElementById("logemail").style.bordercolor = "#ffe699";
-                    document.getElementById("logpass").style.bordercolor = "#ffe699";
-                }
-
-
 
             })
 
