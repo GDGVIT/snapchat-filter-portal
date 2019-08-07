@@ -73,7 +73,14 @@ input[type=text], select {
     border: 5px solid #ffe699;
     border-radius: 15px;
     box-sizing: border-box;
+    
     }
+
+
+input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+        background-color: transparent;
+}
 
 /*Classes inside the field boxes*/
 .field{         
@@ -117,7 +124,6 @@ input[type=text], select {
    text-align:left;
    padding:0px;
     margin-top:2px;
-    
 
 }
 
@@ -131,16 +137,20 @@ input[type=text], select {
     font-size:22px;
     text-align:left;
     padding:0px;
-    margin-top:2px;
-    
+    margin-top:2px;   
 }
+
+textarea {
+    resize: none;
+    height: 300px;
+    outline: none;
+ }
 
 .snapchat{
     float:right;
     text-align:left;
     padding-top:60px;
     padding-bottom:80px;
-    
 }
 
 input[type=password], select {
@@ -161,8 +171,9 @@ input[type=password], select {
         border-radius: 15px;
         box-sizing: border-box;
         background-color: #ffe699;
-        border: 0px;
-        }
+        border: 0px; 
+        
+    }
 
 
     .col-12{
@@ -193,6 +204,7 @@ input[type=password], select {
         box-sizing: border-box;
         border: 5px solid #ffe699;
         background-color:#FFFDE7;
+        outline: none;
         }
 
         input[type=textarea], select {

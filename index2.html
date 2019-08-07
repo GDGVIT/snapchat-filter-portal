@@ -36,6 +36,13 @@
                 min-width: 60%;
             }
         }
+
+        
+        @media (max-width : 992px) {
+            .input-width {
+                min-width: 50%;
+            }
+        }
     </style>
 
 </head>
@@ -56,19 +63,19 @@
                             </div>
                             <div class="cover">
                                 <input class="field  input-width" type="text" id="email1" placeholder="Email"
-                                    name="email" maxlength="30" required>
+                                    name="email" onfocus="focus()" maxlength="30" required>
                             </div>
                             <div class="cover">
                                 <input class="field  input-width" type="password" placeholder="Password" id="pass1"
                                     name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                                     title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
-                                    maxlength="30" required>
+                                    maxlength="30" onfocus="focus()" required>
                             </div>
                             <div class="cover">
                                 <input class="field  input-width" type="password" placeholder="Confirm Password"
                                     id="pass2" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                                     title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
-                                    maxlength="30" required>
+                                    maxlength="30" onfocus="focus()"required>
                             </div>
                             <div class="cover">
                                 <input id="reg" type="button" class="field input-width" value="Register">
@@ -131,7 +138,7 @@
                 let status = [];
                 let re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
-                if (re.test(email.value.trim())) {
+                if (re.test(email.trim())) {
 
                     status.push("true")
 
@@ -210,6 +217,13 @@
                     //                 console.log(err)
                     //             })
                 }
+
+                function focus() {
+                    document.getElementById("logemail").style.bordercolor = "#ffe699";
+                    document.getElementById("logpass").style.bordercolor = "#ffe699";
+                }
+
+
 
             })
 
