@@ -55,6 +55,9 @@
 
 <body>
     <div class="content">
+        <div class="container-fluid red" style="position: absolute;">
+            <b>Error! Please check your username/password once again! </b>
+        </div>
         <div class="section2">
             <div class="heading">
                 <b>Filter Submission Portal</b>
@@ -130,7 +133,6 @@
         window.onload = function () {
             document.getElementById("reg").addEventListener("click", function (e) {
 
-
                 var name = document.getElementById("name1").value;
                 var email = document.getElementById("email1").value;
                 var password = document.getElementById("pass1").value;
@@ -179,7 +181,6 @@
 
                     document.getElementById("pass1").classList.add("red");
                     document.getElementById("pass2").classList.add("red");
-
                 }
 
                 if (status.includes("false")) {
