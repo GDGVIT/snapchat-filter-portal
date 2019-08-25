@@ -163,13 +163,13 @@
                 }
 
                 var len = password.length;
-                if (len >= 6) {
-
-                    status.push("true")
-
-                } else if (password.value != confirmPassword.value || len <= 6) {
+                if (  password != confirmPassword || len <= 6) {
 
                     status.push("false")
+
+                } else if (len >= 6) {
+
+                    status.push("true")
 
                     document.getElementById("pass1").style.borderColor = "red";
                     document.getElementById("pass1").value = "";
