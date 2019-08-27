@@ -40,6 +40,9 @@
 
 <body>
     <div class="content">
+        <div class="container-fluid" id="banner" style="position: fixed; z-index: 100;">
+            <b>There was some problem while uploading! </b>
+        </div>
         <div class="section3">
             <div class="heading">
                 <b>Upload your filter</b>
@@ -55,12 +58,11 @@
                                 <button class="newfield input-width"  id="inputFileToLoad">Choose Image</button> -->
                         </div>
                         <div class="col-12">
-                            <textarea placeholder="Description" rows="10" cols="70">
+                            <textarea id="descrip" placeholder="Description" rows="10" cols="70">
                                 </textarea>
                         </div>
                         <div class="col-12">
-                            <input id="upl" type="button" class="field input-width"
-                                value="Submit">
+                            <input id="upl" type="button" class="field input-width" value="Submit">
                         </div>
                     </div>
                 </div>
@@ -103,26 +105,37 @@
             document.getElementById("upl").addEventListener("click", function (e) {
 
                 var file = document.getElementById("selectedFile")
+                var desc = document.getElementById("descrip")
                 let formData = new FormData();
 
 
-				formData.append('filter', file.files[0])
+                formData.append('filter', file.files[0])
+                // formData.append('description', desc.value)
 
-                fetch("http://localhost:5000/upload", {
-				    method: 'POST',
-						dataType : 'json',
-				    body: formData
-				})
-				    .then(function (response) {
-				        return response
-				    })
-				    .then(res => {
-				        console.log("Response", res)
 
-				    })
-				    .catch(err => {
-				        console.log("Error", err)
-				    })
+                console.log(file.files[0])
+
+                console.log(formData)
+
+                fetch("https://snapchatportal.herokuapp.com/upload", {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': sessionStorage.getItem("token")
+                    },
+                    body: formData
+                })
+                    .then(function (response) {
+                        return response
+                    })
+                    .then(res => {
+                        console.log("Response", res)
+
+                    })
+                    .catch(err => {
+                        document.getElementById("banner").style.display = "block";
+                        document.getElementById("banner").innerHTML = "It's on us! There was some error"
+                        document.getElementById("banner").classList.add("error");
+                    })
 
             });
         }
