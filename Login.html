@@ -51,7 +51,7 @@
 
 <body>
     <div class="content">
-        <div class="container-fluid error" style="position: fixed; z-index: 100;">
+        <div class="container-fluid error" id="banner" style="position: fixed; z-index: 100;">
             <b>Error! Please check your username/password once again!</b>
         </div>
         <div class="section1">
@@ -170,36 +170,44 @@
                     document.getElementById("log").value = "Loading..."
 
 
-                    // fetch("https://snapchatportal.herokuapp.com/login", {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify({
-                    //     email: email.value,
-                    //     password:password.value,
-                    //     }),
-                    // })
-                    //     .then(function (response) {
-                    //         return response.json();
-                    //     })
-                    //     // .then( res => {
-                    //     //     console.log(res)
-                    //     // })
+                    fetch("https://snapchatportal.herokuapp.com/login", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email.value,
+                            password: password.value,
+                        }),
+                    })
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        // .then( res => {
+                        //     console.log(res)
+                        // })
 
-                    //     .then(res => {
-                    //     sessionStorage.setItem("token", res.token)
-                    //     if (res.token) {
-                    //         window.location.href = "index3.html";
-                    //         document.getElementById("log").value = "LogIn"
+                        .then(res => {
+                            sessionStorage.setItem("token", res.token)
+                            if (res.token) {
+                                window.location.href = "Upload.html";
+                                document.getElementById("log").value = "LogIn"
 
-                    //     } else {
-                    //         console.log("Getting error")
-                    //     }
-                    // })
-                    //     .catch( err => {
-                    //         console.log(err)
-                    //     })
+                            } else {
+                                document.getElementById("banner").style.display = "block";
+                            document.getElementById("banner").classList.add("error");
+                            document.getElementById("log").value = "LogIn"
+                            }
+                        })
+                        .catch(err => {
+                            document.getElementById("banner").style.display = "block";
+                        document.getElementById("banner").innerHTML = "It's on us! There was some error"
+                        document.getElementById("banner").classList.add("error");
+                        document.getElementById("log").value = "LogIn"
+
+                        console.log(err)
+
+                        })
 
                 }
 

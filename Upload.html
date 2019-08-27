@@ -40,6 +40,9 @@
 
 <body>
     <div class="content">
+        <div class="container-fluid" id="banner" style="position: fixed; z-index: 100;">
+            <b>There was some problem while uploading! </b>
+        </div>
         <div class="section3">
             <div class="heading">
                 <b>Upload your filter</b>
@@ -59,8 +62,7 @@
                                 </textarea>
                         </div>
                         <div class="col-12">
-                            <input id="upl" type="button" class="field input-width"
-                                value="Submit">
+                            <input id="upl" type="button" class="field input-width" value="Submit">
                         </div>
                     </div>
                 </div>
@@ -106,23 +108,28 @@
                 let formData = new FormData();
 
 
-				formData.append('filter', file.files[0])
+                formData.append('filter', file.files[0])
 
                 fetch("http://localhost:5000/upload", {
-				    method: 'POST',
-						dataType : 'json',
-				    body: formData
-				})
-				    .then(function (response) {
-				        return response
-				    })
-				    .then(res => {
-				        console.log("Response", res)
+                    method: 'POST',
+                    dataType: 'application/json',
+                    body: formData
+                })
+                    .then(function (response) {
+                        return response
+                    })
+                    .then(res => {
+                        console.log("Response", res)
 
-				    })
-				    .catch(err => {
-				        console.log("Error", err)
-				    })
+                    })
+                    .catch(err => {
+                        document.getElementById("banner").style.display = "block";
+                        document.getElementById("banner").innerHTML = "It's on us! There was some error"
+                        document.getElementById("banner").classList.add("error");
+
+                        console.log(err)
+
+                    })
 
             });
         }

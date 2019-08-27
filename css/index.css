@@ -27,6 +27,10 @@
     }
 }
 
+#banner {
+    display: none;
+}
+
 .error {
     background: red;
     text-align: center;

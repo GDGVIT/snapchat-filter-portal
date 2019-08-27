@@ -54,8 +54,8 @@
 
 <body>
     <div class="content">
-        <div class="container-fluid error" style="position: fixed; z-index: 100;">
-            <b>Error! Please check your username/password once again! </b>
+        <div class="container-fluid" id="banner" style="position: fixed; z-index: 100;">
+            <b>There was some problem while registering you! </b>
         </div>
         <div class="section2">
             <div class="heading">
@@ -66,8 +66,8 @@
                     <div class="row" style="text-align:center">
                         <div class="col-12">
                             <div class="cover">
-                                <input class="field  input-width" type="text" id="name1" placeholder="Name" name="name1"
-                                    maxlength="30" required>
+                                <input class="field  input-width" onfocus="yellow(event)" type="text" id="name1"
+                                    placeholder="Name" name="name1" maxlength="30" required>
                             </div>
                             <div class="cover">
                                 <input class="field  input-width" type="text" id="email1" placeholder="Email"
@@ -137,14 +137,24 @@
                 var email = document.getElementById("email1").value;
                 var password = document.getElementById("pass1").value;
                 var confirmPassword = document.getElementById("pass2").value;
-                var created = "19-07-07:08:00:00"
-
 
                 // Password validation
                 // email validation
 
                 let status = [];
                 let re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+                if (name.length <= 1) {
+                    document.getElementById("name1").style.borderColor = "red";
+                    document.getElementById("name1").value = "";
+                    document.getElementById("name1").placeholder = "Please enter valid input";
+
+                    status.push("false")
+
+                    document.getElementById("name1").classList.add("red");
+                } else {
+                    status.push("true")
+                }
 
                 if (re.test(email.trim())) {
 
@@ -159,17 +169,12 @@
                     status.push("false")
 
                     document.getElementById("email1").classList.add("red");
-
                 }
 
                 var len = password.length;
-                if (  password != confirmPassword || len <= 6) {
+                if (password != confirmPassword || len <= 6) {
 
                     status.push("false")
-
-                } else if (len >= 6) {
-
-                    status.push("true")
 
                     document.getElementById("pass1").style.borderColor = "red";
                     document.getElementById("pass1").value = "";
@@ -179,8 +184,10 @@
                     document.getElementById("pass2").value = "";
                     document.getElementById("pass2").placeholder = "Please enter valid input";
 
-                    document.getElementById("pass1").classList.add("red");
-                    document.getElementById("pass2").classList.add("red");
+                } else {
+
+                    status.push("true")
+
                 }
 
                 if (status.includes("false")) {
@@ -194,35 +201,40 @@
                     console.log("Validated")
                     document.getElementById("reg").value = "Loading..."
 
-                    // fetch("https://snapchatportal.herokuapp.com/register", {
-                    //             method: 'POST',
-                    //             headers: {
-                    //                 'Content-Type': 'application/json',
-                    //             },
-                    //             body: JSON.stringify({name: name.value ,
-                    //             email: email.value,
-                    //             password: password.value,
-                    //             created: created}),
-                    //         })
-                    //             .then(function (response) {
-                    //                  return response.json();
-                    //             })
-                    //             // .then( res => {
-                    //             //     console.log(res)
-                    //             // })
+                    fetch("https://snapchatportal.herokuapp.com/register", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name.value,
+                            email: email.value,
+                            password: password.value,
+                        }),
+                    })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(res => {
+                        sessionStorage.setItem("token", res.token)
+                        if (res.token) {
+                            window.location.href = "Login.html";
 
-                    //             .then(res => {
-                    //                 sessionStorage.setItem("token", res.token)
-                    //                 if (res.token) {
-                    //                     window.location.href = "index.html";
-                    //                 } else {
-                    //                     console.log("Getting error")
-                    //                 }
-                    //             })
+                        } else {
+                            document.getElementById("banner").style.display = "block";
+                            document.getElementById("banner").classList.add("error");
+                            document.getElementById("reg").value = "Register"
 
-                    //             .catch( err => {
-                    //                 console.log(err)
-                    //             })
+                        }
+                    })
+                    .catch(err => {
+                        document.getElementById("banner").style.display = "block";
+                        document.getElementById("banner").innerHTML = "It's on us! There was some error"
+                        document.getElementById("banner").classList.add("error");
+                        document.getElementById("reg").value = "Register"
+
+                        console.log(err)
+                    })
                 }
 
             })
