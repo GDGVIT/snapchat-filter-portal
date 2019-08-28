@@ -50,9 +50,9 @@
             <form>
                 <div class="container">
                     <div class="row">
-                        <div class="col-12" id="logout" style="position: relative; transform: translateY(-400%);">
-                            <div
-                                style="height : 40px; width : 40px; border : 2px solid black; border-top : 2px solid transparent; border-radius : 50%; position : absolute; right : 5%; cursor : pointer">
+                        <div class="col-12"  style="position: relative; transform: translateY(-400%); ">
+                            <div id="logout"
+                                style="height : 40px; width : 40px; border : 2px solid black; border-top : 2px solid transparent; border-radius : 50%; position : absolute; right : 5%; cursor : pointer; ">
 
                                 <div
                                     style="position : absolute; top : 0; left : 50%; transform: translate(-50%, -20%); border : 2px solid red; height: 15px">
@@ -119,6 +119,13 @@
     <script type="text/javascript">
 
         window.onload = function () {
+
+            document.getElementById("logout").addEventListener("click", () => {
+                sessionStorage.removeItem("token");
+                window.location.href = "Login.html";
+            })
+
+
             document.getElementById("upl").addEventListener("click", function (e) {
 
                 var file = document.getElementById("selectedFile").files[0]
@@ -176,7 +183,7 @@
                             document.getElementById("banner").innerHTML = "File successfully uploaded"
                             document.getElementById("banner").classList.add("error");
                             setTimeout(() => {
-                                window.locaton.href = "Upload.html"
+                                location.reload();
                             }, 2000)
                         })
                         .catch(err => {
