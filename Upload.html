@@ -107,6 +107,14 @@
                 var desc = document.getElementById("descrip")
                 let formData = new FormData();
 
+                console.log(file.size)
+
+                // if (file.size) {
+
+                // } else {
+
+                // }
+
 
                 formData.append('filter', file)
                 formData.append('description', desc.value)
@@ -119,11 +127,11 @@
                 let status = []
 
 
-                if (formData.get('filter') == undefined){
+                // if (formData.get('filter') == undefined){
 
-                } else {
+                // } else {
 
-                }
+                // }
 
                 fetch("https://snapchatportal.herokuapp.com/upload", {
                     method: 'POST',
