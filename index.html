@@ -55,7 +55,6 @@
 <body>
     <div class="content">
         <div class="container-fluid" id="banner" style="position: fixed; z-index: 100;">
-            <b>There was some problem while registering you! </b>
         </div>
         <div class="section2">
             <div class="heading">
@@ -192,14 +191,16 @@
                     .then(res => {
                         console.log(res)
                         if (res.access_token) {
+                            localStorage.setItem("sc_access_token", res.access_token);
+                            localStorage.setItem("sc_refresh_token", res.refresh_token);
                             document.getElementById("banner").style.backgroundColor = "green";
                             document.getElementById("banner").style.display = "block";
-                            document.getElementById("banner").innerHTML = "User was successfully registered"
+                            document.getElementById("banner").innerHTML = "User was successfully registered!! Redirecting ..."
                             document.getElementById("banner").classList.add("error");
                             document.getElementById("reg").value = "Register"
-                            // setTimeout(() => {
-                            //     window.location.href = "Login.html";
-                            // }, 2500)
+                            setTimeout(() => {
+                                window.location.href = "Login.html";
+                            }, 2500)
                         } else if (res.err = "User already exist"){
                             document.getElementById("banner").style.backgroundColor = "red";
                             document.getElementById("banner").style.display = "block";
