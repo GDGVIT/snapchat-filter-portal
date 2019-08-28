@@ -50,6 +50,13 @@
             <form>
                 <div class="container">
                     <div class="row">
+                    <div class="col-12" id="logout" style="position: relative; transform: translateY(-400%);">
+                            <div style="height : 40px; width : 40px; border : 2px solid black; border-top : 2px solid transparent; border-radius : 50%; position : absolute; right : 5%; cursor : pointer">
+                            
+                                <div style="position : absolute; top : 0; left : 50%; transform: translate(-50%, -20%); border : 2px solid red; height: 15px"></div>
+            
+                            </div>
+                        </div>
                         <div class="col-12">
                             <input type="file" id="selectedFile" accept=".png" style="display: none;" />
                             <input type="button" id="inputFileToLoad" class="newfield input-width" value="Choose Image"
@@ -60,7 +67,7 @@
 
                         </div>
                         <div class="col-12">
-                            <textarea id="descrip" placeholder="Description" rows="10" cols="70"></textarea>
+                            <textarea id="descrip" placeholder="Description" rows="10" cols="40" style="padding-top : 10px; padding-left : 15px"></textarea>
                         </div>
                         <div class="col-12">
                             <input id="upl" type="button" class="field input-width" value="Submit">
@@ -133,17 +140,15 @@
                 }
 
 
-                // document.getElementById("logout").addEventListener("click", (e) => {
-                //     sessionStorage.removeItem("token");
-                //     window.location.href = "Login.html"
-                // })
-
                 if (status.includes("false")) {
                     console.log("There was some error while validating")
                     return false
                 } else {
                     formData.append('filter', file)
                     formData.append('desc', desc.value)
+
+
+                    document.getElementbyId("upl").value = "Uploading...";
 
                     fetch("https://snapchatportal.herokuapp.com/upload", {
                         method: 'POST',
@@ -156,15 +161,19 @@
                             return response
                         })
                         .then(res => {
+                            document.getElementbyId("upl").value = "Submit";
                             console.log("Response", res)
                         })
                         .catch(err => {
+                            document.getElementbyId("upl").value = "Submit";
                             document.getElementById("banner").style.display = "block";
                             document.getElementById("banner").innerHTML = "It's on us! There was some error"
                             document.getElementById("banner").classList.add("error");
                         })
                 }
             });
+
+            
         }
 
         // function uploadPicture() {
