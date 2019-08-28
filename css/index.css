@@ -63,7 +63,7 @@ body{
             width:100%;
             padding:15px;
         }
-    }
+    
 }    
     
 .content{
@@ -233,13 +233,20 @@ input[type=password], select {
     }
 
 /*Description field*/
-    textarea, select{
+    select{
         width: 40%;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
         border-radius: 10px;
         box-sizing: border-box;
+        border: 5px solid #ffe699;
+    }
+
+
+    textarea{
+        display: inline-block;
+        border-radius: 10px;
         border: 5px solid #ffe699;
     }
 
@@ -255,12 +262,21 @@ input[type=password], select {
         outline: none;
         }
 
-        input[type=textarea], select {
+        select {
             width: 30%;
             padding: 12px 20px;
             margin: 8px 0;
             display: inline-block;
             border-radius: 20px;
             box-sizing: border-box;
+            background-color: solid #ffe699;
+            }
+
+
+        input[type=textarea] {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border-radius: 20px;
             background-color: solid #ffe699;
             }

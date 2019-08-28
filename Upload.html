@@ -58,8 +58,7 @@
                                 <button class="newfield input-width"  id="inputFileToLoad">Choose Image</button> -->
                         </div>
                         <div class="col-12">
-                            <textarea id="descrip" placeholder="Description" rows="10" cols="70">
-                                </textarea>
+                            <textarea id="descrip" placeholder="Description" rows="10" cols="70"></textarea>
                         </div>
                         <div class="col-12">
                             <input id="upl" type="button" class="field input-width" value="Submit">
@@ -104,18 +103,27 @@
         window.onload = function () {
             document.getElementById("upl").addEventListener("click", function (e) {
 
-                var file = document.getElementById("selectedFile")
+                var file = document.getElementById("selectedFile").files[0]
                 var desc = document.getElementById("descrip")
                 let formData = new FormData();
 
 
-                formData.append('filter', file.files[0])
-                // formData.append('description', desc.value)
+                formData.append('filter', file)
+                formData.append('description', desc.value)
+                console.log(formData.get('description'))
 
-
-                console.log(file.files[0])
+                console.log(file)
 
                 console.log(formData)
+
+                let status = []
+
+
+                if (formData.get('filter') == undefined){
+
+                } else {
+
+                }
 
                 fetch("https://snapchatportal.herokuapp.com/upload", {
                     method: 'POST',
@@ -129,7 +137,6 @@
                     })
                     .then(res => {
                         console.log("Response", res)
-
                     })
                     .catch(err => {
                         document.getElementById("banner").style.display = "block";
