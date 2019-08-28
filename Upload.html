@@ -50,11 +50,14 @@
             <form>
                 <div class="container">
                     <div class="row">
-                    <div class="col-12" id="logout" style="position: relative; transform: translateY(-400%);">
-                            <div style="height : 40px; width : 40px; border : 2px solid black; border-top : 2px solid transparent; border-radius : 50%; position : absolute; right : 5%; cursor : pointer">
-                            
-                                <div style="position : absolute; top : 0; left : 50%; transform: translate(-50%, -20%); border : 2px solid red; height: 15px"></div>
-            
+                        <div class="col-12" id="logout" style="position: relative; transform: translateY(-400%);">
+                            <div
+                                style="height : 40px; width : 40px; border : 2px solid black; border-top : 2px solid transparent; border-radius : 50%; position : absolute; right : 5%; cursor : pointer">
+
+                                <div
+                                    style="position : absolute; top : 0; left : 50%; transform: translate(-50%, -20%); border : 2px solid red; height: 15px">
+                                </div>
+
                             </div>
                         </div>
                         <div class="col-12">
@@ -66,8 +69,13 @@
                             style="color : red; height : 15px; text-align : center">
 
                         </div>
+                        <div class="col-12" id="filename"
+                            style="color : green; height : 15px; text-align : center">
+
+                        </div>
                         <div class="col-12">
-                            <textarea id="descrip" placeholder="Description" rows="10" cols="40" style="padding-top : 10px; padding-left : 15px"></textarea>
+                            <textarea id="descrip" placeholder="Description" rows="10" cols="40"
+                                style="padding-top : 10px; padding-left : 15px"></textarea>
                         </div>
                         <div class="col-12">
                             <input id="upl" type="button" class="field input-width" value="Submit">
@@ -148,7 +156,7 @@
                     formData.append('desc', desc.value)
 
 
-                    document.getElementbyId("upl").value = "Uploading...";
+                    document.getElementById("upl").value = "Uploading...";
 
                     fetch("https://snapchatportal.herokuapp.com/upload", {
                         method: 'POST',
@@ -161,11 +169,16 @@
                             return response
                         })
                         .then(res => {
-                            document.getElementbyId("upl").value = "Submit";
+                            document.getElementById("upl").value = "Submit";
                             console.log("Response", res)
+                            document.getElementById("banner").style.backgroundColor = "green";
+                            document.getElementById("banner").style.display = "block";
+                            document.getElementById("banner").innerHTML = "File successfully uploaded"
+                            document.getElementById("banner").classList.add("error");
+                            window.location.href = "upload.html"
                         })
                         .catch(err => {
-                            document.getElementbyId("upl").value = "Submit";
+                            document.getElementById("upl").value = "Submit";
                             document.getElementById("banner").style.display = "block";
                             document.getElementById("banner").innerHTML = "It's on us! There was some error"
                             document.getElementById("banner").classList.add("error");
@@ -173,7 +186,7 @@
                 }
             });
 
-            
+
         }
 
         // function uploadPicture() {
