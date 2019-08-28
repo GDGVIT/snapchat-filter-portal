@@ -143,7 +143,7 @@
                     return false
                 } else {
                     formData.append('filter', file)
-                    formData.append('description', desc.value)
+                    formData.append('desc', desc.value)
 
                     fetch("https://snapchatportal.herokuapp.com/upload", {
                         method: 'POST',
