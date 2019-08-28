@@ -175,7 +175,9 @@
                             document.getElementById("banner").style.display = "block";
                             document.getElementById("banner").innerHTML = "File successfully uploaded"
                             document.getElementById("banner").classList.add("error");
-                            window.location.href = "Upload.html"
+                            setTimeout(() => {
+                                window.locaton.href = "Upload.html"
+                            }, 2000)
                         })
                         .catch(err => {
                             document.getElementById("upl").value = "Submit";
