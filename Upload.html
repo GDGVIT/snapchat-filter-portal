@@ -54,8 +54,10 @@
                             <input type="file" id="selectedFile" accept=".png" style="display: none;" />
                             <input type="button" id="inputFileToLoad" class="newfield input-width" value="Choose Image"
                                 onclick="document.getElementById('selectedFile').click();" />
-                            <!-- <input type="file" multiple accept="image/png" style="display:none" >
-                                <button class="newfield input-width"  id="inputFileToLoad">Choose Image</button> -->
+                        </div>
+                        <div class="col-12" id="size-upload-error"
+                            style="color : red; height : 15px; text-align : center">
+
                         </div>
                         <div class="col-12">
                             <textarea id="descrip" placeholder="Description" rows="10" cols="70"></textarea>
@@ -63,6 +65,7 @@
                         <div class="col-12">
                             <input id="upl" type="button" class="field input-width" value="Submit">
                         </div>
+
                     </div>
                 </div>
                 <div class="container ">
@@ -105,53 +108,62 @@
 
                 var file = document.getElementById("selectedFile").files[0]
                 var desc = document.getElementById("descrip")
+
                 let formData = new FormData();
-
-                console.log(file.size)
-
-                // if (file.size) {
-
-                // } else {
-
-                // }
-
-
-                formData.append('filter', file)
-                formData.append('description', desc.value)
-                console.log(formData.get('description'))
-
-                console.log(file)
-
-                console.log(formData)
 
                 let status = []
 
 
-                // if (formData.get('filter') == undefined){
+                if (desc.value.length >= 2) {
+                    status.push("true")
+                } else {
+                    document.getElementById("descrip").style.borderColor = "red"
+                    status.push("false")
+                }
 
-                // } else {
+                if (file == undefined) {
+                    status.push("false")
+                } else {
+                    if (file.size / 1024 < 3072) {
+                        status.push("true")
+                    } else {
+                        document.getElementById("size-upload-error").innerHTML = "Please upload image of file size less than 3MB"
+                        status.push("false")
+                    }
+                }
 
-                // }
 
-                fetch("https://snapchatportal.herokuapp.com/upload", {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': sessionStorage.getItem("token")
-                    },
-                    body: formData
-                })
-                    .then(function (response) {
-                        return response
+                // document.getElementById("logout").addEventListener("click", (e) => {
+                //     sessionStorage.removeItem("token");
+                //     window.location.href = "Login.html"
+                // })
+
+                if (status.includes("false")) {
+                    console.log("There was some error while validating")
+                    return false
+                } else {
+                    formData.append('filter', file)
+                    formData.append('description', desc.value)
+
+                    fetch("https://snapchatportal.herokuapp.com/upload", {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': sessionStorage.getItem("token")
+                        },
+                        body: formData
                     })
-                    .then(res => {
-                        console.log("Response", res)
-                    })
-                    .catch(err => {
-                        document.getElementById("banner").style.display = "block";
-                        document.getElementById("banner").innerHTML = "It's on us! There was some error"
-                        document.getElementById("banner").classList.add("error");
-                    })
-
+                        .then(function (response) {
+                            return response
+                        })
+                        .then(res => {
+                            console.log("Response", res)
+                        })
+                        .catch(err => {
+                            document.getElementById("banner").style.display = "block";
+                            document.getElementById("banner").innerHTML = "It's on us! There was some error"
+                            document.getElementById("banner").classList.add("error");
+                        })
+                }
             });
         }
 

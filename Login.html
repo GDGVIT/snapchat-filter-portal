@@ -121,6 +121,7 @@
 
 
                 let status = [];
+
                 let re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
 
@@ -155,7 +156,7 @@
 
                 if (status.includes("false")) {
                     console.log("There was some error while validating")
-                    return ("false")
+                    return false
                 }
 
                 else {
