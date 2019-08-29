@@ -68,10 +68,7 @@ body{
     
 }    
     
-.content{
-    width:100%;
-    overflow:hidden;
-}
+
 
 /* First section background */
 
@@ -116,7 +113,6 @@ a:hover{
 }
 
 input[type=text], select {
-    width: 25%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -204,7 +200,6 @@ textarea,select {
 }
 
 input[type=password], select {
-    width: 25%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
